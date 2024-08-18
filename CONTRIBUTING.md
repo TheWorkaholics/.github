@@ -1,3 +1,5 @@
+# Contribuição
+
 ## Antes de começar
 
 Novas ideias sobre organização, bibliotecas e arquiteturas são sempre bem-vindas!
@@ -43,7 +45,39 @@ Outro ponto importante é a revisão. Embora seja comum que não haja nenhuma re
 
 Finalmente, o merge. Embora o `GitHub Flow` não especifique onde o merge deve ser feito, geralmente ele é direcionado para as branches `dev` ou `main`. Isso significa que o pull request aceito contém o código mais recente e mais próximo da produção. Tenha isso em mente ao realizar merges.
 
+## Git Flow
+
+A ideia do Git Flow é organizar as branches, e suas regras não são exatamente complicadas. No entanto, como todo padrão, é importante saber quando evitar excessos.
+
+Nesse fluxo de trabalho, temos dois tipos de branches: as padrões e as temporárias. Branches padrões são os suspeitos usuais: main e dev, enquanto as branches temporárias recebem nomes de acordo com a situação.
+
+**Branches padrões:**
+
+- **Master ou Main**: Onde fica o código em produção. Eventualmente, tudo vem parar aqui.
+- **Development ou Dev**: Aqui fica o código em desenvolvimento, que será o próximo a entrar em produção. É a branch mais atualizada e a com maior atividade.
+
+As branches temporárias seguem a nomenclatura `<branch_subtype>/<name>`. O subtipo pode ser `feature`, `bugfix`, `hotfix` ou `release`. O nome varia de acordo com a implementação e necessidade.
+
+- **Feature**: São as branches com novas implementações. Elas são sempre criadas a partir da `dev`. Alguns exemplos são "feature/buttons" ou "feat/home-page".
+- **Bugfix**: Parecidas com as features, também são criadas a partir da `dev`, porém com a intenção de corrigir bugs e problemas específicos. Por exemplo, "bugfix/login-issue".
+- **Hotfix**: Essas são usadas para resolver bugs críticos que precisam ser corrigidos imediatamente no código de produção. Elas são criadas a partir da ramificação `main` e mescladas de volta na `master` e na `development`. Por exemplo, "hotfix/security-patch".
+- **Release**: Serve para manter o histórico de lançamento. Segue o versionamento semântico como parte do nome.
+
+No geral, o `Git Flow` é uma faca de dois gumes. Enquanto `features` e `fixes` são relativamente compreensíveis, `release` pode pecar pelo excesso.
+
+Pense em um time Scrum, com sprints entre uma semana e um mês. Ao final de cada sprint, sempre haverá um "entregável", ou seja, a cada semana haverá uma nova versão do produto. Isso significa que, em um ano, facilmente haverá 50 branches só de release. Tenha em mente que alguns projetos podem durar décadas.
+
+Nesse sentido, não é recomendado o uso de branches de release em times ágeis. Também pode não ser apropriado dedicar mais esforço ao nome das branches do que aos comentários em si. Sendo assim, eu recomendo a seguinte abordagem:
+
+- **feat**: Equivalente a features, mas com um nome mais simples. Essa escolha será discutida mais adiante, mas se resume ao fato de que a maioria dos seus commits terá essa palavra incluída.
+- **fix**: Seja bugfix ou hotfix, ambos servem ao mesmo propósito: corrigir bugs. Bugfix tende a ser menos urgente, portanto, é incluído apenas na branch dev, enquanto hotfix é incluído tanto em dev quanto em main. No final do dia, tudo o que você precisa lembrar é de enviar qualquer branch para dev; o resto é detalhe.
+- **release**: Enquanto não faz sentido criar releases toda semana, alguns são mais relevantes que outros. A primeira versão de produção, a primeira `1.0.0`. Não é necessário salvar cada nova versão, apenas as mais importantes. Isso você quem define.
+
+Por fim, é fácil compreender como isso complementa o GitHub Flow de forma eficiente. Boa parte do nosso trabalho é feita em branches, e algo tão vago quanto "crie sua própria branch" não tem muito significado. Um bom nome de branch, assim como bons commits, ajudam a encontrar alterações no futuro e entender como o sistema se desenvolve ao longo do tempo. No início, isso não parece ter importância, mas com o passar dos anos, é um esforço que se paga.
+
+
 ## Referências
 
 - [GitHub flow - GitHub Docs](https://docs.github.com/en/get-started/using-github/github-flow)
+- [Git Flow: entenda o que é, como e quando utilizar](https://www.alura.com.br/artigos/git-flow-o-que-e-como-quando-utilizar)
 
