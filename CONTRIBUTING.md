@@ -60,7 +60,7 @@ As branches temporárias seguem a nomenclatura `<branch_subtype>/<name>`. O subt
 
 - **Feature**: São as branches com novas implementações. Elas são sempre criadas a partir da `dev`. Alguns exemplos são "feature/buttons" ou "feat/home-page".
 - **Bugfix**: Parecidas com as features, também são criadas a partir da `dev`, porém com a intenção de corrigir bugs e problemas específicos. Por exemplo, "bugfix/login-issue".
-- **Hotfix**: Essas são usadas para resolver bugs críticos que precisam ser corrigidos imediatamente no código de produção. Elas são criadas a partir da ramificação `main` e mescladas de volta na `master` e na `development`. Por exemplo, "hotfix/security-patch".
+- **Hotfix**: Essas são usadas para resolver bugs críticos que precisam ser corrigidos imediatamente no código de produção. Elas são criadas a partir da ramificação `main` e mescladas de volta na nela mesma e na `development`. Por exemplo, "hotfix/security-patch".
 - **Release**: Serve para manter o histórico de lançamento. Segue o versionamento semântico como parte do nome.
 
 No geral, o `Git Flow` é uma faca de dois gumes. Enquanto `features` e `fixes` são relativamente compreensíveis, `release` pode pecar pelo excesso.
