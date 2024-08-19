@@ -75,9 +75,44 @@ Nesse sentido, não é recomendado o uso de branches de release em times ágeis.
 
 Por fim, é fácil compreender como isso complementa o GitHub Flow de forma eficiente. Boa parte do nosso trabalho é feita em branches, e algo tão vago quanto "crie sua própria branch" não tem muito significado. Um bom nome de branch, assim como bons commits, ajudam a encontrar alterações no futuro e entender como o sistema se desenvolve ao longo do tempo. No início, isso não parece ter importância, mas com o passar dos anos, é um esforço que se paga.
 
+## Versionamento Semântico
+
+O versionamento semântico é utilizado para manter o registro das versões do software ao longo do tempo. Ele é empregado diretamente em branches de release (por exemplo, `release/0.1.0`) para armazenar cópias do trabalho, mas também desempenha um papel crucial em informar a equipe de desenvolvimento sobre o impacto das mudanças realizadas em cada atualização do software.
+
+Para fornecer informações claras e relevantes, o versionamento semântico é estruturado em três níveis de versões, expressos no formato MAJOR.MINOR.PATCH. Esses números indicam a gravidade e a natureza das modificações realizadas no software:
+
+- **MAJOR (1.x.x)**: É o caso mais drástico, onde novas funcionalidades são introduzidas (`feat`), mas trazem uma quebra de compatibilidade com o código existente. Isso significa que a versão anterior não pode mais ser usada ou precisará ser mantida separadamente.
+- **MINOR (x.1.x)**: Trata-se de novas funcionalidades (`feat`) mantendo a compatibilidade com o código existente. Para a maioria dos sistemas, esse é o caso mais comum de alteração.
+- **PATCH (x.x.1)**: Se refere a correções significativas que justifiquem uma branch própria (`fix`). Ajustes menores, como correções de erros de digitação na documentação, geralmente não requerem a atualização da versão PATCH, a menos que impactem diretamente o uso ou a compreensão do software.
+
+Outro detalhe importante é que a contagem de PATCH é reiniciada a cada nova versão MINOR, assim como a contagem de MINOR é reiniciada a cada nova versão MAJOR. Isso significa que, se houver uma mudança que quebre a compatibilidade, o software não passará da versão `1.1.2` para `2.1.2`, mas sim para `2.0.0`.
+
+No entanto, para o primeiro lançamento de um software, não é incomum que a versão inicial seja `0.1.0`.  Isso ocorre especialmente em equipes ágeis, que valorizam uma entrega contínua. A versão `1.0.0` que marca a primeira versão estável e bem documentada só pode ser atingida depois do cumprimento de certos critérios:
+
+1. **Ter documentação pública:** Documentação abrangente deve estar disponível para usuários e desenvolvedores, detalhando os recursos, uso e API do software.
+2. **Conduzir testes completos:** Procedimentos de teste rigorosos devem ser implementados para validar a estabilidade e confiabilidade do software.
+3. **Reunir feedback dos usuários:** O feedback dos usuários deve ser coletado e integrado para identificar e resolver problemas potenciais.
+
+> A versão mínima recomendada pelo versionamento semântico inicia em `0.1.0`.
+
+Devido a essas exigências, geralmente leva tempo para atingir a primeira versão estável. Como resultado, até mesmo produtos em produção podem estar longe desse estado inicialmente.
+
+Até chegarmos na primeira versão estável, trabalhamos incrementando o número PATCH conforme necessário, normalmente a cada nova versão. Também podemos aumentar o número MINOR após adições significativas de recursos, mas nunca aumentamos o número MAJOR até que todas as regras acima sejam atendidas.
+
+**Exemplo de progressão de versão:**
+
+- Lançamento inicial: `0.1.0`
+- Primeira correção de bug: `0.1.1`
+- Recurso secundário adicionado: `0.1.2`
+- Recurso principal adicionado: `0.2.0`
+
+Além dessas versões, as versões de pré-lançamento podem incluir identificadores adicionais para indicar que ainda estão em desenvolvimento. Exemplos comuns são `0.1.4-alpha` e `0.1.4-beta`. Também é possível adicionar metadados que garantem a compatibilidade da build, como em `0.1.4-alpha+001` ou `0.1.4+20130313144700`. Esses valores são especialmente úteis quando há mudanças que afetam a compatibilidade da aplicação sem alterar o código-fonte, como a atualização de dependências externas, ajustes na configuração do ambiente ou modificações em chaves de API. 
+
+Para finalizar, é importante considerar o momento adequado para incrementar os valores de versão. A situação ideal é durante o merge na branch de desenvolvimento. Contudo, em equipes com múltiplos desenvolvedores, isso pode gerar conflitos. Portanto, o uso de ferramentas de automação para realizar o incremento de versão com base em commits é recomendado. Para que isso funcione de forma eficaz, é fundamental que os commits sigam padrões consistentes, como o uso de mensagens claras e padronizadas, que indiquem corretamente o tipo de mudança realizada (por exemplo, `feat`, `fix` e `chore`). Isso reduz o risco de erros e garante que a versão do software seja sempre um reflexo preciso do seu estado atual.
 
 ## Referências
 
-- [GitHub flow - GitHub Docs](https://docs.github.com/en/get-started/using-github/github-flow)
+- [GitHub Flow - Docs](https://docs.github.com/en/get-started/using-github/github-flow)
 - [Git Flow: entenda o que é, como e quando utilizar](https://www.alura.com.br/artigos/git-flow-o-que-e-como-quando-utilizar)
+- [Semantic Versioning 2.0.0 - Docs](https://semver.org/)
 
