@@ -10,11 +10,10 @@ Este projeto está aberto a todo tipo de contribuição. No entanto, é importan
 
 As regras descritas neste documento estão organizadas em quatro seções, que implementam total ou parcialmente workflows amplamente reconhecidos e utilizados na comunidade:
 
-- [GitHub Flow](#) - Como gerenciar `projetos`, `forks` e `pull requests`.
-- [Git Flow](#) - Orientações para organizar `branches` por `features`.
-- [Versionamento Semântico](#) - Como lidar com `versões` e `lançamentos`.
-- [Conventional Commits](#) - Práticas recomendadas para fazer bons `commits`.
-
+- [GitHub Flow](#github-flow) - Como gerenciar `projetos`, `forks` e `pull requests`. 
+- [Git Flow](#git-flow) - Orientações para organizar `branches` por `features`. 
+- [Versionamento Semântico](#versionamento-semântico) - Como lidar com `versões` e `lançamentos`. 
+- [Conventional Commits](#conventional-commits) - Práticas recomendadas para fazer bons `commits`.
 ## GitHub Flow
 
 Antes de tudo, é importante destacar que `GitHub Flow` e `Git Flow` **não** são a mesma coisa.
@@ -60,7 +59,7 @@ As branches temporárias seguem a nomenclatura `<branch_subtype>/<name>`. O subt
 
 - **Feature**: São as branches com novas implementações. Elas são sempre criadas a partir da `dev`. Alguns exemplos são "feature/buttons" ou "feat/home-page".
 - **Bugfix**: Parecidas com as features, também são criadas a partir da `dev`, porém com a intenção de corrigir bugs e problemas específicos. Por exemplo, "bugfix/login-issue".
-- **Hotfix**: Essas são usadas para resolver bugs críticos que precisam ser corrigidos imediatamente no código de produção. Elas são criadas a partir da ramificação `main` e mescladas de volta na nela mesma e na `development`. Por exemplo, "hotfix/security-patch".
+- **Hotfix**: Essas são usadas para resolver bugs críticos que precisam ser corrigidos imediatamente no código de produção. Elas são criadas a partir da ramificação `main` e mescladas de volta na `master` e na `development`. Por exemplo, "hotfix/security-patch".
 - **Release**: Serve para manter o histórico de lançamento. Segue o versionamento semântico como parte do nome.
 
 No geral, o `Git Flow` é uma faca de dois gumes. Enquanto `features` e `fixes` são relativamente compreensíveis, `release` pode pecar pelo excesso.
@@ -110,9 +109,54 @@ Além dessas versões, as versões de pré-lançamento podem incluir identificad
 
 Para finalizar, é importante considerar o momento adequado para incrementar os valores de versão. A situação ideal é durante o merge na branch de desenvolvimento. Contudo, em equipes com múltiplos desenvolvedores, isso pode gerar conflitos. Portanto, o uso de ferramentas de automação para realizar o incremento de versão com base em commits é recomendado. Para que isso funcione de forma eficaz, é fundamental que os commits sigam padrões consistentes, como o uso de mensagens claras e padronizadas, que indiquem corretamente o tipo de mudança realizada (por exemplo, `feat`, `fix` e `chore`). Isso reduz o risco de erros e garante que a versão do software seja sempre um reflexo preciso do seu estado atual.
 
+## Conventional Commits
+
+O conventional commits fornece um conjunto fácil de regras para criar um histórico de commit explícito; o que torna mais fácil escrever ferramentas automatizadas em cima. Esta convenção se encaixa com o Versionamento Semântico, descrevendo os recursos, correções e mudanças significativas feitas nas mensagens de commit.
+
+```sh
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+O commit contém os seguintes elementos estruturais, para comunicar a intenção aos consumidores da sua biblioteca: 
+1. `fix`: Equivalente ao PATCH
+2. `feat`: Equivalente ao MINOR
+3. `feat!`: Equivalente ao MAJOR
+
+> Adicionar ! após o tipo indica uma quebra de compatibilidade com a versão antiga, também conhecida como BREAKING CHANGE
+
+Por padrão existem apenas `feat`, `fix` e `BREAKING CHANGE`, porém outros padrões incluem tipos adicionais para melhor legibilidade dos commits. Esses grupos extras não possuem influencia no versionamento semântico, por tanto não são mandatórios.
+
+Incluindo uma lista maior de tipos, podemos dividir em dois grandes grupos.
+
+Alterações que modificam o código da aplicação:
+- `feat`: Um novo recurso 
+- `fix`: Uma correção de bug 
+- `refactor`: Uma alteração de código mantém a funcionalidade e muda apenas a organização
+- `revert`: Reverte alterações de commits antigos. Usado com `git revert`
+
+Alterações que modificam outros arquivos:
+- `docs`: Alterações na documentação 
+- `test`: Alterações em testes
+- `ci`: Alterações no CI/CD
+- `chore`: Tarefas gerais que não envolvem código ou sem classificação especifica
+
+Exemplo:
+```sh
+feat: allow provided config object to extend other configs
+
+BREAKING CHANGE: `extends` key in config file is now used for extending other config files
+```
+
+Não há imposição sobre maiúsculas e minúsculas no tipo, corpo ou qualquer outra parte do comentário. No entanto, é importante ser consistente, caso contrário, as ferramentas automatizadas podem não ser capazes de lidar com seu commit.
+
 ## Referências
 
 - [GitHub Flow - Docs](https://docs.github.com/en/get-started/using-github/github-flow)
 - [Git Flow: entenda o que é, como e quando utilizar](https://www.alura.com.br/artigos/git-flow-o-que-e-como-quando-utilizar)
 - [Semantic Versioning 2.0.0 - Docs](https://semver.org/)
-
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#specification)
+- [angular/CONTRIBUTING](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
